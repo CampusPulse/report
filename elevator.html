@@ -91,7 +91,23 @@ destination:
 					option.textContent = `${building.id} - ${building.name}`;
 					buildingSelect.appendChild(option);
 				});
-			});
+			}).then(() => {
+					// accept room number from URL parameters
+				const urlParams = new URLSearchParams(window.location.search);
+				const room = urlParams.get("room");
+				if (room) {
+					document.getElementById("room").value = room;
+				}
+
+				const building = urlParams.get("building");
+
+				if (building) {
+					console.log(building)
+					const bldgElem = document.getElementById("building")
+					$('#building').val(building).trigger("change");
+				}
+
+			})
 
 		// Initialize Select2 on the building dropdown
 		$('#building').select2({
@@ -103,28 +119,6 @@ destination:
 			document.querySelector('.select2-search__field').focus();
 		});
 
-		// accept room number from URL parameters
-		const urlParams = new URLSearchParams(window.location.search);
-		const room = urlParams.get("room");
-		if (room) {
-			document.getElementById("room").value = room;
-		}
-
-		const building = urlParams.get("building");
-	
-		if (building) {
-			console.log(building)
-			const bldgElem = document.getElementById("building")
-			$('#building').val(building).trigger("change");
-			// $('#building').trigger({
-			// 	type: 'select2:select',
-			// 	params: {
-			// 		data: building
-			// 	}
-			// });
-			// bldgElem.value = building;
-			// bldgElem.dispatchEvent(new Event('change'))
-		}
 
 
 		

@@ -13,130 +13,171 @@ destination:
   sys_id: 3f1dd0320a0a0b99000a53f7604a2ef9
   condense_except: what-area-does-this-pertain-to,subject
 ---
+
 {% include form_start.html destination=page.destination %}
-	<label for="route">What route is affected?</label>
-	<select id="route" name="route" required onchange="updateStopList(this[this.selectedIndex].id)">
-		<option value="" id="route_default" disabled selected>Select a route</option>
-	</select>
+<label for="route">What route is affected?</label>
+<select
+  id="route"
+  name="route"
+  required
+  onchange="updateStopList(this[this.selectedIndex].id)"
+>
+  <option value="" id="route_default" disabled selected>Select a route</option>
+</select>
 
-	<label for="stop">Which stop is affected?</label>
-	<select id="stop" name="stop" required>
-		<option value="" id="stop_default" disabled selected>Select a stop</option>
-	</select>
+<label for="stop">Which stop is affected?</label>
+<select id="stop" name="stop" required>
+  <option value="" id="stop_default" disabled selected>Select a stop</option>
+</select>
 
-	<label for="time">When did this happen?</label>
-	<div class="sidebyside">
-		<input type="datetime-local" id="time" name="time" required>
-		<button type="button" step="any" required onclick="document.getElementById('time').value = new Date().toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false}).replace(',', '').replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2').replace(' ', 'T')">Now</button>
-	</div>
+<label for="time">When did this happen?</label>
+<div class="sidebyside">
+  <input type="datetime-local" id="time" name="time" required />
+  <button
+    type="button"
+    step="any"
+    required
+    onclick="document.getElementById('time').value = new Date().toLocaleString([], { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hour12: false}).replace(',', '').replace(/(\d+)\/(\d+)\/(\d+)/, '$3-$1-$2').replace(' ', 'T')"
+  >
+    Now
+  </button>
+</div>
 
+<label for="description">Description of the Problem</label>
+<div class="sidebyside" style="flex-wrap: wrap">
+  <button
+    type="button"
+    id="missed-stop"
+    onclick="addToDesc('The bus did not stop for me. ', 'missed-stop')"
+  >
+    Missed my Stop
+  </button>
+  <button
+    type="button"
+    id="early"
+    onclick="addToDesc('The bus was early. ', 'early')"
+  >
+    Early
+  </button>
+  <button
+    type="button"
+    id="late"
+    onclick="addToDesc('The bus was late. ', 'late')"
+  >
+    Late
+  </button>
+  <button
+    type="button"
+    id="overcrowded"
+    onclick="addToDesc('The bus was full or overcrowded. ', 'overcrowded')"
+  >
+    Overcrowded
+  </button>
+  <button
+    type="button"
+    id="feels-unsafe"
+    onclick="addToDesc('I didn\'t feel safe on the bus. ', 'feels-unsafe')"
+  >
+    Feels Unsafe
+  </button>
+</div>
+<textarea
+  id="description"
+  name="description"
+  placeholder="Describe the issue. i.e. my bus was overcrowded and arrived 13 minutes late"
+  rows="5"
+></textarea>
+<!-- hidden form items -->
+{% for item in page.staticvalues %}
+<input type="hidden" name="{{ item.name }}" value="{{ item.value }}" />
+{% endfor %}
+<!-- TODO: submit building name too -->
+{% include form_end.html destination=page.destination %}
 
-
-	<label for="description">Description of the Problem</label>
-	<div class="sidebyside" style="flex-wrap: wrap;">
-		<button onclick="addToDesc('The bus did not stop for me. ')">Missed my Stop</button>
-		<button onclick="addToDesc('The bus was early. ')">Early</button>
-		<button onclick="addToDesc('The bus was late. ')">Late</button>
-		<button onclick="addToDesc('The bus was full or overcrowded. ')">overcrowded</button>
-		<button onclick="addToDesc('I didn\'t feel safe on the bus. ')">feels unsafe</button>
-	</div>
-	<textarea id="description" name="description" placeholder="Describe the issue. i.e. my bus was overcrowded and arrived 13 minutes late" rows="5"></textarea>
-	<!-- hidden form items -->
-	{% for item in page.staticvalues %}
-		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
-	{% endfor %}
-	<!-- TODO: submit building name too -->
-	{% include form_end.html destination=page.destination %}
-
-
+<script src="data-filler.js"></script>
 <script>
-	const stopSelectElement = document.getElementById("stop")
-	const descriptionElement = document.getElementById("description")
+  const stopSelectElement = document.getElementById("stop");
+  const descriptionElement = document.getElementById("description");
 
+  fetch("/busroutes.json")
+    .then((response) => response.json())
+    .then((data) => {
+      const routeSelect = document.getElementById("route");
+      data.routes.forEach((route) => {
+        const option = document.createElement("option");
+        option.id = `route-${route.id}`;
+        option.value = `${route.id} ${route.name}`;
+        option.textContent = `${route.id} ${route.name}`;
+        routeSelect.appendChild(option);
+      });
+    });
 
-	fetch('/busroutes.json')
-		.then(response => response.json())
-		.then(data => {
-			const routeSelect = document.getElementById('route');
-			data.routes.forEach(route => {
-				const option = document.createElement('option');
-				option.id = `route-${route.id}`;
-				option.value = `${route.id} ${route.name}`;
-				option.textContent = `${route.id} ${route.name}`;
-				routeSelect.appendChild(option);
-			});
-		});
+  const busstops = fetch("/busstops.json").then((response) => response.json());
 
-	const busstops = fetch('/busstops.json')
-		.then(response => response.json())
+  const stop_route_map = fetch("/busroutesbystop.json").then((response) =>
+    response.json()
+  );
 
-	const stop_route_map = fetch('/busroutesbystop.json')
-		.then(response => response.json())
-
-
-	function addToDesc(str) {
+  /*function addToDesc(str) {
 		descriptionElement.value += str; 
-	}
+	}*/
 
-	function reverseObjectOfLists(obj) {
-		// this function made by chatGPT
-		const reversed = {};
-		for (const [key, values] of Object.entries(obj)) {
-			for (const value of values) {
-				if (!reversed[value]) {
-					reversed[value] = [];
-				}
-				reversed[value].push(Number(key));
-			}
-		}
-		return reversed;
-	}
+  function reverseObjectOfLists(obj) {
+    // this function made by chatGPT
+    const reversed = {};
+    for (const [key, values] of Object.entries(obj)) {
+      for (const value of values) {
+        if (!reversed[value]) {
+          reversed[value] = [];
+        }
+        reversed[value].push(Number(key));
+      }
+    }
+    return reversed;
+  }
 
+  function clearBusStops(except = ["stop_default"]) {
+    for (const child of Array.from(stopSelectElement.childNodes)) {
+      if (!except.includes(child.id)) {
+        stopSelectElement.removeChild(child);
+      }
+    }
+  }
 
-	function clearBusStops(except = ['stop_default']) {
-		for (const child of Array.from(stopSelectElement.childNodes)) {
-			if (!except.includes(child.id)){
-				stopSelectElement.removeChild(child);
-			}
-		}
-	}
+  function createStopOption(stop) {
+    const option = document.createElement("option");
+    option.id = `stop-${stop.id}`;
+    option.value = `${stop.id} ${stop.name}`;
+    option.textContent = `${stop.id} ${stop.name}`;
+    return option;
+  }
 
-	function createStopOption(stop) {
-		const option = document.createElement('option');
-		option.id = `stop-${stop.id}`;
-		option.value = `${stop.id} ${stop.name}`;
-		option.textContent = `${stop.id} ${stop.name}`;
-		return option;
-	}
+  function updateStopList(route) {
+    if (route) {
+      updateStopList();
+      const routeID = route.split("-")[1];
 
+      stop_route_map
+        .then((srm) => reverseObjectOfLists(srm))
+        .then((stopsByRoute) => stopsByRoute[routeID].map((id) => `stop-${id}`))
+        .then((except) => {
+          except.push("stop_default");
+          console.log(except);
+          // if there are no other stops (i.e. theres only one exception), dont clear the list
+          if (except.length > 1) {
+            clearBusStops(except);
+          }
+        });
+    } else {
+      clearBusStops();
+      busstops.then((data) => {
+        const stopSelect = document.getElementById("stop");
+        data.stops.forEach((stop) => {
+          stopSelect.appendChild(createStopOption(stop));
+        });
+      });
+    }
+  }
 
-	function updateStopList(route) {
-	
-		if (route) {
-			updateStopList()
-			const routeID = route.split("-")[1];
-
-			stop_route_map.then(srm => reverseObjectOfLists(srm))
-				.then(stopsByRoute => stopsByRoute[routeID].map((id) => `stop-${id}`))
-				.then((except) => {
-					except.push('stop_default');
-					console.log(except);
-					// if there are no other stops (i.e. theres only one exception), dont clear the list
-					if (except.length > 1){
-						clearBusStops(except);
-					}
-				});
-
-		} else {
-			clearBusStops()
-			busstops.then(data => {
-				const stopSelect = document.getElementById('stop');
-				data.stops.forEach(stop => {
-					stopSelect.appendChild(createStopOption(stop));
-				});
-			});
-		}
-	}
-
-	updateStopList();
+  updateStopList();
 </script>

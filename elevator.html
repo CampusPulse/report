@@ -80,8 +80,11 @@ destination:
 	window.onload = () => {
 
 		// Load buildings from JSON
-		// fetch('https://access.campuspulse.app/buildings.json')
+		{% if jekyll.environment == "production" %}		
+		fetch('https://access.campuspulse.app/buildings.json')
+		{% else %}
 		fetch("http://localhost:5000/buildings.json")
+		{% endif %}
 			.then(response => response.json())
 			.then(data => {
 				const buildingSelect = document.getElementById('building');

@@ -62,6 +62,9 @@ destination:
 	<!-- TODO: submit building name too -->
 	{% include form_end.html destination=page.destination %}
 
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 <script>
 	const descriptionElement = document.getElementById("description")
 
@@ -69,23 +72,63 @@ destination:
 		descriptionElement.value += str;
 	}
 
-	// Load buildings from JSON
-	fetch('/buildings.json')
-		.then(response => response.json())
-		.then(data => {
-			const buildingSelect = document.getElementById('building');
-			data.buildings.forEach(building => {
-				const option = document.createElement('option');
-				option.value = `${building.id}:${building.name}`;
-				option.textContent = `${building.name}`;
-				buildingSelect.appendChild(option);
+	
+
+	
+
+	// Load data on page load
+	window.onload = () => {
+
+		// Load buildings from JSON
+		// fetch('https://access.campuspulse.app/buildings.json')
+		fetch("http://localhost:5000/buildings.json")
+			.then(response => response.json())
+			.then(data => {
+				const buildingSelect = document.getElementById('building');
+				data.buildings.forEach(building => {
+					const option = document.createElement('option');
+					option.value = `${building.id}:${building.acronym}`;
+					option.textContent = `${building.id} - ${building.name}`;
+					buildingSelect.appendChild(option);
+				});
 			});
+
+		// Initialize Select2 on the building dropdown
+		$('#building').select2({
+			placeholder: "Search and select a building",
+			width: '100%',
+			minimumResultsForSearch: 0  // Always shows search bar
+		}).on('select2:open', function () {
+			// Automatically focus on the search box when dropdown opens
+			document.querySelector('.select2-search__field').focus();
 		});
 
-	// accept room number from URL parameters
-	const urlParams = new URLSearchParams(window.location.search);
-	const room = urlParams.get("room");
-	if (room) {
-		document.getElementById("room").value = room;
-	}
+		// accept room number from URL parameters
+		const urlParams = new URLSearchParams(window.location.search);
+		const room = urlParams.get("room");
+		if (room) {
+			document.getElementById("room").value = room;
+		}
+
+		const building = urlParams.get("building");
+	
+		if (building) {
+			console.log(building)
+			const bldgElem = document.getElementById("building")
+			$('#building').val(building).trigger("change");
+			// $('#building').trigger({
+			// 	type: 'select2:select',
+			// 	params: {
+			// 		data: building
+			// 	}
+			// });
+			// bldgElem.value = building;
+			// bldgElem.dispatchEvent(new Event('change'))
+		}
+
+
+		
+	};
+	
+	
 </script>

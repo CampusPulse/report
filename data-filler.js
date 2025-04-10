@@ -20,34 +20,41 @@ function addToDesc(text, button = undefined) {
   }
 }
 
-function populateData(ev) {
+async function populateData(ev) {
   const buildingSelect = document.getElementById("building");
 
   const searchParams = new URL(document.location.toString()).searchParams;
 
   if (searchParams.has("room")) {
-    const roomParam = searchParams.get("room");
-    if (roomParam) {
-      document.getElementById("room").value = roomParam;
-    }
+    document.getElementById("room").value = searchParams.get("room");
   }
 
   if (buildingSelect) {
-    fetch("/buildings.json")
-      .then((response) => response.json())
-      .then((data) => {
-        const buildings = data.buildings;
-        // Alphabetically sort the building selection options by name
-        buildings.sort((a, b) => {
-          return a.name.localeCompare(b.name);
-        });
-        data.buildings.forEach((building) => {
-          const option = document.createElement("option");
-          option.value = `${building.id}:${building.name}`;
-          option.textContent = `${building.name}`;
-          buildingSelect.appendChild(option);
-        });
-      });
+    let response;
+
+    try {
+      response = await fetch("https://access.campusepulse.app/buildings.json");
+    } catch (e) {
+      response = await fetch("/buildings.json");
+    }
+
+    const data = await response.json();
+
+    const buildings = data.buildings;
+    // Alphabetically sort the building selection options by name
+    buildings.sort((a, b) => {
+      return a.name.localeCompare(b.name);
+    });
+    buildings.forEach((building) => {
+      const option = document.createElement("option");
+      option.value = `${building.id}:${building.name}`;
+      option.textContent = `${building.name}`;
+      buildingSelect.appendChild(option);
+    });
+
+    if (searchParams.has("building")) {
+      buildingSelect.value = searchParams.get("building");
+    }
   }
 }
 

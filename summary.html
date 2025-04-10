@@ -2,129 +2,176 @@
 layout: centercontent
 title: Report Summary
 ---
+
 <div class="summary">
-	<!-- Summary fields will be populated here -->
-	<div id="submitButton">
-	</div>
-	<p id="submitButtonDescription" style="font-style: italic; display:none">After clicking the button above, log in (if necessary) and copy/paste the values on this page into the form</p>
+  <!-- Summary fields will be populated here -->
+  <div id="submitButton"></div>
+  <p id="submitButtonDescription" style="font-style: italic; display: none">
+    After clicking the button above, log in (if necessary) and copy/paste the
+    values on this page into the form
+  </p>
 </div>
 
-
 <script>
+  const submitButton = document.getElementById("submitButton");
+  const submitButtonDescription = document.getElementById(
+    "submitButtonDescription"
+  );
+  const summary = document.getElementsByClassName("summary")[0];
 
-	const submitButton = document.getElementById("submitButton");
-	const submitButtonDescription = document.getElementById("submitButtonDescription");
-	const summary = document.getElementsByClassName("summary")[0];
+  function toHumanString(ident_string) {
+    let string = ident_string.replaceAll("_", " ");
+    string = string.replaceAll("-", " ");
 
+    string = string
+      .split(" ")
+      .map((word) => {
+        return word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join(" ");
 
-	function toHumanString( ident_string ) {
-		let string = ident_string.replaceAll("_", " ");
-		string = string.replaceAll("-", " ");
+    return string;
+  }
 
-		string = string.split(" ").map(word => {
-			return word.charAt(0).toUpperCase() + word.slice(1);
-		}).join(" ");
+  // Populate fields with URL parameters
+  const params = new URLSearchParams(window.location.search);
 
-		return string;
-	}
+  let internal_params = new Map();
+  let summary_params = new Map();
+  // loop through the query parameters and partition the parameters based on internal or not( do they start with an underscore)
 
-	// Populate fields with URL parameters
-	const params = new URLSearchParams(window.location.search);
+  for (const [key, value] of params) {
+    if (!key.startsWith("_")) {
+      summary_params.set(key, value);
+    } else {
+      internal_params.set(key, value);
+    }
+  }
 
-	let internal_params = new Map();
-	let summary_params = new Map();
-	// loop through the query parameters and partition the parameters based on internal or not( do they start with an underscore)
+  function copyFromElement(id) {
+    const el = document.getElementById(id.trim());
+    const value = el.textContent;
 
-	for (const [key, value] of params) {
-		if (!key.startsWith("_")) {
-			summary_params.set(key, value);
-		} else {
-			internal_params.set(key, value);
-		}
-	}
+    const textArea = document.createElement("textarea");
+    textArea.value = value;
+    document.body.appendChild(textArea);
+    textArea.focus();
+    textArea.select();
+    try {
+      document.execCommand("copy");
+    } catch (err) {
+      console.error("Unable to copy to clipboard", err);
+    }
+    document.body.removeChild(textArea);
+  }
 
+  function createSummaryElement(key, value) {
+    const summaryElement = document.createElement("p");
+    if (value === "") {
+      value = "<em>unspecified</em>";
+    }
+    summaryElement.innerHTML = `<h3>${toHumanString(
+      key
+    )}:</h3> <span id="${key}">${value}</span>
+  <button id="${key}-copy" onclick="copyFromElement('${key}')">
+  	Copy text
+  </button>
+  `;
 
-	function createSummaryElement(key, value) {
-		const summaryElement = document.createElement("p");
-		if (value === "") {
-			value = "<em>unspecified</em>";
-		}
-		summaryElement.innerHTML = `<strong>${toHumanString(key)}:</strong> <span id="${key}">${value}</span>`
-		summary.insertBefore(summaryElement, submitButton);
-	}
+    summary.insertBefore(summaryElement, submitButton);
 
-	function createSummary(value_map, condense_into = null, condense_exceptions = null){
-		
-		if (condense_into) {
-			let condensed = "<br>";
-			for (let [key, value] of value_map) {
-				if (condense_exceptions && condense_exceptions.includes(key)) {
-					createSummaryElement(key, value);
-				} else {
-					if (value === "") {
-						value = "<em>unspecified</em>";
-					}
-					condensed += `${toHumanString(key)}: ${value}<br>`;
-				}
-			}
-			createSummaryElement(condense_into, condensed);
-		} else {
+    const keySelector = document.getElementById(key);
+    if (keySelector && keySelector.lastChild.nodeName != "BR") {
+      const newBreak = document.createElement("br");
+      keySelector.append(newBreak);
+    }
+  }
 
-			for (let [key, value] of value_map) {
-				createSummaryElement(key, value);
-			}
-		}
-	}
+  function createSummary(
+    value_map,
+    condense_into = null,
+    condense_exceptions = null
+  ) {
+    if (condense_into) {
+      let condensed = "<br>";
+      for (let [key, value] of value_map) {
+        if (condense_exceptions && condense_exceptions.includes(key)) {
+          createSummaryElement(key, value);
+        } else {
+          if (value === "") {
+            value = "<em>unspecified</em>";
+          }
+          condensed += `${toHumanString(key)}: ${value}<br>`;
+        }
+      }
+      createSummaryElement(condense_into, condensed);
+    } else {
+      for (let [key, value] of value_map) {
+        createSummaryElement(key, value);
+      }
+    }
+  }
 
-	function populateSubmitButton(destination, title){
-		const buttonlink = document.createElement("a");
-		buttonlink.href = destination;
-		buttonlink.target = "_blank";
-		buttonlink.rel = "noopener noreferrer";
-		const button = document.createElement("button");
-		button.innerHTML = title;
-		buttonlink.appendChild(button);
-		submitButton.appendChild(buttonlink);
-		// show the description
-		submitButtonDescription.style.display = "block";
-	}
+  function populateSubmitButton(destination, title) {
+    const buttonlink = document.createElement("a");
+    buttonlink.href = destination;
+    buttonlink.target = "_blank";
+    buttonlink.rel = "noopener noreferrer";
+    const button = document.createElement("button");
+    button.innerHTML = title;
+    buttonlink.appendChild(button);
+    submitButton.appendChild(buttonlink);
+    // show the description
+    submitButtonDescription.style.display = "block";
+  }
 
-	function replaceValues(inputText, value_map) {
-		let words = inputText.split(" ");
-		// if any of the words in the inputText match a key in the summary_params (surrounded by {}), replace it with the value
-		for (let i = 0; i < words.length; i++) {
-			let lookup_identifier = words[i];
-			// remove the brackets and check if the key exists
-			if (lookup_identifier.startsWith("{") && lookup_identifier.endsWith("}")) {
-				lookup_identifier = lookup_identifier.slice(1, -1);
-			} else {
-				continue
-			}
-			if (summary_params.has(lookup_identifier)) {
-				words[i] = summary_params.get(lookup_identifier);
-			}
-		}
-		return words.join(" ");
-	}
-	
-	if (internal_params.get("_sys_id")) {
-		// if the key is _sys_id, we need to create the form submission button
-		populateSubmitButton(`https://{{ site.servicenow_domain }}/sp?id=sc_cat_item&sys_id=${internal_params.get("_sys_id")}`, "Submit to {{ site.servicenow_domain }}");
-	}
+  function replaceValues(inputText, value_map) {
+    let words = inputText.split(" ");
+    // if any of the words in the inputText match a key in the summary_params (surrounded by {}), replace it with the value
+    for (let i = 0; i < words.length; i++) {
+      let lookup_identifier = words[i];
+      // remove the brackets and check if the key exists
+      if (
+        lookup_identifier.startsWith("{") &&
+        lookup_identifier.endsWith("}")
+      ) {
+        lookup_identifier = lookup_identifier.slice(1, -1);
+      } else {
+        continue;
+      }
+      if (summary_params.has(lookup_identifier)) {
+        words[i] = summary_params.get(lookup_identifier);
+      }
+    }
+    return words.join(" ");
+  }
 
-	if (internal_params.get("_subject")) {
-		let subject = internal_params.get("_subject");
-		subject = replaceValues(subject, summary_params);
-		summary_params.set("subject", subject);
-	}
+  if (internal_params.get("_sys_id")) {
+    // if the key is _sys_id, we need to create the form submission button
+    populateSubmitButton(
+      `https://{{ site.servicenow_domain }}/sp?id=sc_cat_item&sys_id=${internal_params.get(
+        "_sys_id"
+      )}`,
+      "Submit to {{ site.servicenow_domain }}"
+    );
+  }
 
-	if (internal_params.get("_condense_except")) {
-		let condense_except = internal_params.get("_condense_except");
-		condense_except.replaceAll(" ", "");
-		// if the key is _condense, we need to condense the summary into a single field
-		createSummary(summary_params, "Issue Description", condense_except.split(","));
-	} else {
-		createSummary(summary_params)
-	}
-	
+  if (internal_params.get("_subject")) {
+    let subject = internal_params.get("_subject");
+    subject = replaceValues(subject, summary_params);
+    summary_params.set("subject", subject);
+  }
+
+  if (internal_params.get("_condense_except")) {
+    let condense_except = internal_params.get("_condense_except");
+    condense_except.replaceAll(" ", "");
+    // if the key is _condense, we need to condense the summary into a single field
+    createSummary(
+      summary_params,
+      "Issue Description",
+      condense_except.split(",")
+    );
+  } else {
+    createSummary(summary_params);
+  }
 </script>

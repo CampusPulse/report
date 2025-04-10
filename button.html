@@ -2,14 +2,13 @@
 layout: centercontent
 title: Report Broken Door Button
 
-
 staticvalues:
   - name: phone
     value: 503 832 7422
   - name: contact_method
     value: Text
   - name: type
-    value: door button	
+    value: door button
   - name: category
     value: Structural Building Maintenance
   - name: subcategory
@@ -23,65 +22,144 @@ destination:
 ---
 
 {% include form_start.html destination=page.destination %}
-	<label for="name">Your Name</label>
-	<input type="text" id="name" name="name" placeholder="Enter your name">
-	
-	<label for="email">Your Email</label>
-	<input type="email" id="email" name="email" required placeholder="Enter your email">
-	
-	<label for="building">Building</label>
-	<select id="building" name="building" required>
-		<option value="" disabled selected>Select a building</option>
-	</select>
-	
-	<label for="floor">Floor</label>
-	<input type="text" id="floor" name="floor" required placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)" pattern="A|B|[0-9]" title="Enter floor number as either 'A', 'B', or a single numeric value">
-	
-	<label for="description">Description of the Problem</label>
-	<div class="sidebyside" style="flex-wrap: wrap;">
-		<button type="button" onclick="addToDesc('The button is not responding. ')">Not Responsive</button>
-		<button type="button" onclick="addToDesc('The button is physically damaged. ')">Physically Damaged</button>
-		<button type="button" onclick="addToDesc('The button is dirty. ')">Dirty</button>
-		<button type="button" onclick="addToDesc('The button or door is obstructed. ')">Obstructed</button>
-	</div>
-	<span>Please elaborate with more details in the box below (i.e. Which entryway is it, whats the closest landmark/quad/parking lot, etc)</span>
-	<textarea id="description" name="description" required placeholder="Describe the issue..." rows="5"></textarea>
+<label for="name">Your Name</label>
+<input type="text" id="name" name="name" placeholder="Enter your name" />
 
-	<label for="email_optin">
-	<input type="checkbox" id="email_optin" name="email_optin" value="true"/> Email me with updates about this report
-	</label>
-	
-	<!-- hidden form items -->
-	 {% for item in page.staticvalues %}
-		<input type="hidden" name="{{ item.name }}" value="{{ item.value }}">
-	{% endfor %}
-	<!-- TODO: submit building name too -->
-	{% include form_end.html destination=page.destination %}
+<label for="email">Your Email</label>
+<input
+  type="email"
+  id="email"
+  name="email"
+  required
+  placeholder="Enter your email"
+/>
 
-<script>
-	const descriptionElement = document.getElementById("description")
+<label for="building">Building</label>
+<select id="building" name="building" required>
+  <option value="" disabled selected>Select a building</option>
+</select>
 
-	function addToDesc(str) {
-		descriptionElement.value += str;
-	}
+<label for="floor">Floor</label>
+<input
+  type="text"
+  id="floor"
+  name="floor"
+  required
+  placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)"
+  pattern="A|B|[0-9]"
+  title="Enter floor number as either 'A', 'B', or a single numeric value"
+/>
 
-	// Load buildings from JSON
-	fetch('/buildings.json')
-		.then(response => response.json())
-		.then(data => {
-			const buildingSelect = document.getElementById('building');
-			data.buildings.forEach(building => {
-				const option = document.createElement('option');
-				option.value = `${building.id}:${building.name}`;
-				option.textContent = `${building.name}`;
-				buildingSelect.appendChild(option);
-			});
-		});
+<label for="description">Description of the Problem</label>
+<div class="sidebyside" style="flex-wrap: wrap">
+  <button
+    type="button"
+    id="not-responsive"
+    onclick="addToDesc('The button is not responding. ', 'not-responsive')"
+  >
+    Not Responsive
+  </button>
+  <button
+    type="button"
+    id="physically-damaged"
+    onclick="addToDesc('The button is physically damaged. ', 'physically-damaged')"
+  >
+    Physically Damaged
+  </button>
+  <button
+    type="button"
+    id="dirty"
+    onclick="addToDesc('The button is dirty. ', 'dirty')"
+  >
+    Dirty
+  </button>
+  <button
+    type="button"
+    id="obstructed"
+    onclick="addToDesc('The button or door is obstructed. ', 'obstructed')"
+  >
+    Obstructed
+  </button>
+</div>
+<span>Please elaborate with more details in the box below</span>
+<textarea
+  id="description"
+  name="description"
+  required
+  placeholder="Describe the issue..."
+  rows="5"
+></textarea>
+<label for="name">Your Name</label>
+<input type="text" id="name" name="name" placeholder="Enter your name" />
 
-	// accept room number from URL parameters
-	const urlParams = new URLSearchParams(window.location.search);
-	const room = urlParams.get("room");
-	if (room) {
-		document.getElementById("room").value = room;
-	}
-</script>
+<label for="email">Your Email</label>
+<input
+  type="email"
+  id="email"
+  name="email"
+  required
+  placeholder="Enter your email"
+/>
+
+<label for="building">Building</label>
+<select id="building" name="building" required>
+  <option value="" disabled selected>Select a building</option>
+</select>
+
+<label for="floor">Floor</label>
+<input
+  type="text"
+  id="floor"
+  name="floor"
+  required
+  placeholder="Enter the floor (e.g., A for Basement, 1, 2, etc.)"
+  pattern="A|B|[0-9]"
+  title="Enter floor number as either 'A', 'B', or a single numeric value"
+/>
+
+<label for="description">Description of the Problem</label>
+<div class="sidebyside" style="flex-wrap: wrap">
+  <button type="button" onclick="addToDesc('The button is not responding. ')">
+    Not Responsive
+  </button>
+  <button
+    type="button"
+    onclick="addToDesc('The button is physically damaged. ')"
+  >
+    Physically Damaged
+  </button>
+  <button type="button" onclick="addToDesc('The button is dirty. ')">
+    Dirty
+  </button>
+  <button
+    type="button"
+    onclick="addToDesc('The button or door is obstructed. ')"
+  >
+    Obstructed
+  </button>
+</div>
+<span
+  >Please elaborate with more details in the box below (i.e. Which entryway is
+  it, whats the closest landmark/quad/parking lot, etc)</span
+>
+<textarea
+  id="description"
+  name="description"
+  required
+  placeholder="Describe the issue..."
+  rows="5"
+></textarea>
+
+<label for="email_optin">
+  <input type="checkbox" id="email_optin" name="email_optin" value="true" />
+  Email me with updates about this report
+</label>
+
+<!-- hidden form items -->
+{% for item in page.staticvalues %}
+<input type="hidden" name="{{ item.name }}" value="{{ item.value }}" />
+{% endfor %}
+<!-- TODO: submit building name too -->
+{% include form_end.html destination=page.destination %}
+
+<script src="data-filler.js"></script>

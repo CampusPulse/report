@@ -1,106 +1,110 @@
 html,
 body {
-	height: 100%;
+  height: 100%;
 }
 
 html {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 body {
-	font-family: Arial, sans-serif;
+  font-family: Arial, sans-serif;
 
-	background-color: #f9f9f9;
-	display: flex;
-	flex-direction: column;
+  background-color: #f9f9f9;
+  display: flex;
+  flex-direction: column;
 }
 
 main {
-	flex: 1 0 auto;
-	margin: 20px;
+  flex: 1 0 auto;
+  margin: 20px;
 }
 
 footer {
-	margin: 20px;
+  margin: 20px;
 }
 
 h1 {
-	color: #0056b3;
-	text-align: center;
+  color: #0056b3;
+  text-align: center;
 }
 
 .pageContent {
-	background: #ffffff;
-	padding: 20px;
-	border-radius: 8px;
-	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-	max-width: 600px;
-	margin: auto;
+  background: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: auto;
 }
 
 label {
-	display: block;
-	margin-top: 10px;
-	font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  font-weight: bold;
 }
 
 input,
 textarea,
 select,
 button {
-	width: calc(100% - 20px);
-	/* Added padding adjustment */
-	margin-top: 5px;
-	padding: 10px;
-	border: 1px solid #cccccc;
-	border-radius: 4px;
-	font-size: 16px;
-	box-sizing: border-box;
-	/* Ensures padding is included in width calculation */
+  width: calc(100% - 20px);
+  /* Added padding adjustment */
+  margin-top: 5px;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  font-size: 16px;
+  box-sizing: border-box;
+  /* Ensures padding is included in width calculation */
 }
 
 button {
-	width: auto;
+  width: auto;
 }
 
-input[type=checkbox] {
-	width: auto
+input[type="checkbox"] {
+  width: auto;
 }
 
 button {
-	background-color: #0056b3;
-	color: white;
-	border: none;
-	cursor: pointer;
-	margin-top: 20px;
+  background-color: #0056b3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  margin-top: 20px;
 }
 
 button:hover {
-	background-color: #003d80;
+  background-color: #003d80;
 }
+
+button.active {
+  background-color: #000d50;
+}
+
 /* .summary is fundamentally the same as .pageContent */
 .summary p {
-	font-size: 16px;
-	margin: 10px 0;
+  font-size: 16px;
+  margin: 10px 0;
 }
 
 .summary span {
-	color: #333333;
+  color: #333333;
 }
 
 .pre {
-	font-family: monospace;
+  font-family: monospace;
 }
 
 .sidebyside {
-	display: flex;
-	justify-content: center;
+  display: flex;
+  justify-content: center;
 }
 
 .sidebyside > * {
-	margin: 10px;
-
+  margin: 10px;
 }
 
 .sidebyside button {
-	flex-basis: 130px;
+  flex-basis: 130px;
 }

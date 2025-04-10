@@ -1,369 +1,136 @@
 {
-	"buildings": [
-		{
-			"id": "1",
-			"name": "George Eastman Hall"
-		},
-		{
-			"id": "2",
-			"name": "Frank Ritter Arena"
-		},
-		{
-			"id": "3",
-			"name": "George H. Clark Gymnasium, Campus Center"
-		},
-		{
-			"id": "4",
-			"name": "Student Alumni Union"
-		},
-		{
-			"id": "5",
-			"name": "Wallace Library"
-		},
-		{
-			"id": "6",
-			"name": "Liberal Arts Hall"
-		},
-		{
-			"id": "007A",
-			"name": "James E. Booth Hall, Sands Family Studios, Vignelli Center for Design Studies, University Gallery"
-		},
-		{
-			"id": "007B",
-			"name": "Frank E. Gannett Hall"
-		},
-		{
-			"id": "8",
-			"name": "Thomas Gosnell Hall"
-		},
-		{
-			"id": "9",
-			"name": "James E. Gleason Hall"
-		},
-		{
-			"id": "10",
-			"name": "Lewis P. Ross Hall"
-		},
-		{
-			"id": "11",
-			"name": "Student Hall for Exploration and Development"
-		},
-		{
-			"id": "12",
-			"name": "Max Lowenthal Hall"
-		},
-		{
-			"id": "13",
-			"name": "Orange Hall"
-		},
-		{
-			"id": "14",
-			"name": "Hugh L. Carey Hall"
-		},
-		{
-			"id": "15",
-			"name": "Monroe Hall"
-		},
-		{
-			"id": "16",
-			"name": "Schmitt Interfaith Center"
-		},
-		{
-			"id": "17",
-			"name": "Engineering Hall"
-		},
-		{
-			"id": "18",
-			"name": "Munsell Color Science Laboratory"
-		},
-		{
-			"id": "20",
-			"name": "Riverknoll Apartments"
-		},
-		{
-			"id": "22",
-			"name": "Gene Polisseni Center"
-		},
-		{
-			"id": "23",
-			"name": "Hale-Andrews Student Life Center, August Center"
-		},
-		{
-			"id": "24",
-			"name": "Gordon Field House & Activities Center"
-		},
-		{
-			"id": "25",
-			"name": "Grace Watson Hall"
-		},
-		{
-			"id": "27",
-			"name": "Frances Baker Hall A"
-		},
-		{
-			"id": "28",
-			"name": "Residence Hall A"
-		},
-		{
-			"id": "29",
-			"name": "Frances Baker Hall B"
-		},
-		{
-			"id": "30",
-			"name": "Residence Hall B"
-		},
-		{
-			"id": "31",
-			"name": "Eugene Colby Hall A"
-		},
-		{
-			"id": "32",
-			"name": "Residence Hall C"
-		},
-		{
-			"id": "33",
-			"name": "Eugene Colby Hall B"
-		},
-		{
-			"id": "35",
-			"name": "Kate Gleason Hall"
-		},
-		{
-			"id": "37",
-			"name": "Eugene Colby Hall C"
-		},
-		{
-			"id": "39",
-			"name": "Helen Fish Hall (A)"
-		},
-		{
-			"id": "41",
-			"name": "Helen Fish Hall (B&C)"
-		},
-		{
-			"id": "43",
-			"name": "Fredericka Douglass Sprague Perry Hall"
-		},
-		{
-			"id": "47",
-			"name": "Sol Heumann Hall"
-		},
-		{
-			"id": "49",
-			"name": "Carlton Gibson Hall"
-		},
-		{
-			"id": "050A",
-			"name": "Mark Ellingson Hall"
-		},
-		{
-			"id": "050B",
-			"name": "Peter Peterson Hall"
-		},
-		{
-			"id": "050C",
-			"name": "Residence Hall D"
-		},
-		{
-			"id": "53",
-			"name": "Rosica Hall"
-		},
-		{
-			"id": "55",
-			"name": "Student Development Center"
-		},
-		{
-			"id": "60",
-			"name": "Lyndon Baines Johnson Hall"
-		},
-		{
-			"id": "70",
-			"name": "Golisano Hall, Cybersecurity Hall"
-		},
-		{
-			"id": "71",
-			"name": "MAGIC Spell Studios"
-		},
-		{
-			"id": "73",
-			"name": "Institute Hall"
-		},
-		{
-			"id": "74",
-			"name": "Laboratory for Applied Computing"
-		},
-		{
-			"id": "75",
-			"name": "Center for Bioscience Education & Technology"
-		},
-		{
-			"id": "76",
-			"name": "Chester F. Carlson Center for Imaging Science"
-		},
-		{
-			"id": "77",
-			"name": "Bausch & Lomb Center"
-		},
-		{
-			"id": "78",
-			"name": "Louise Slaughter Hall"
-		},
-		{
-			"id": "80",
-			"name": "Red Barn"
-		},
-		{
-			"id": "81",
-			"name": "Sustainability Institute Hall"
-		},
-		{
-			"id": "82",
-			"name": "Engineering Technology Hall"
-		},
-		{
-			"id": "83",
-			"name": "Music Performance Theater"
-		},
-		{
-			"id": "84",
-			"name": "Research Center"
-		},
-		{
-			"id": "86",
-			"name": "Brown Hall"
-		},
-		{
-			"id": "87",
-			"name": "University Services Center, Student Innovation Hall"
-		},
-		{
-			"id": "89",
-			"name": "Crossroads"
-		},
-		{
-			"id": "90",
-			"name": "Perkins Green Apartments"
-		},
-		{
-			"id": "91",
-			"name": "Observatory House"
-		},
-		{
-			"id": "96",
-			"name": "Vehicle Repair Building"
-		},
-		{
-			"id": "99",
-			"name": "Facilities Management Services"
-		},
-		{
-			"id": "100",
-			"name": "Liberty Hill"
-		},
-		{
-			"id": "125",
-			"name": "Gosnell Boathouse"
-		},
-		{
-			"id": "150",
-			"name": "125 Tech Park Drive"
-		},
-		{
-			"id": "232",
-			"name": "Joseph M. Lobozzo Alumni House"
-		},
-		{
-			"id": "300-330",
-			"name": "University Commons Suites"
-		},
-		{
-			"id": "400",
-			"name": "Global Village Plaza"
-		},
-		{
-			"id": "403",
-			"name": "Global Village Way C"
-		},
-		{
-			"id": "404",
-			"name": "Global Village Way D"
-		},
-		{
-			"id": "405",
-			"name": "Global Village Way E"
-		},
-		{
-			"id": "500",
-			"name": "RIT Inn & Conference Center"
-		},
-		{
-			"id": "604",
-			"name": "Greek House A - Zeta Tau Alpha"
-		},
-		{
-			"id": "608",
-			"name": "Greek House B - Delta Phi Epsilon"
-		},
-		{
-			"id": "612",
-			"name": "Greek House C - Alpha Sigma Alpha"
-		},
-		{
-			"id": "616",
-			"name": "Greek House D - Phi Kappa Psi"
-		},
-		{
-			"id": "620",
-			"name": "Greek House E - Alpha Xi Delta"
-		},
-		{
-			"id": "624",
-			"name": "Greek House F - Pi Kappa Phi"
-		},
-		{
-			"id": "800",
-			"name": "100 Park Point Drive"
-		},
-		{
-			"id": "820",
-			"name": "175 Jefferson Road"
-		},
-		{
-			"id": "905",
-			"name": "Annex V"
-		},
-		{
-			"id": "906",
-			"name": "Annex VI"
-		},
-		{
-			"id": "907",
-			"name": "Annex VII"
-		},
-		{
-			"id": "908",
-			"name": "Annex VIII"
-		},
-		{
-			"id": "909",
-			"name": "Annex IX"
-		},
-		{
-			"id": "910",
-			"name": "Kodak Park"
-		},
-		{
-			"id": "995",
-			"name": "Leenhouts Lodge at the Tait Preserve"
-		},
-		{
-			"id": "998",
-			"name": "40 Franklin Street"
-		},
-		{
-			"id": "WEL",
-			"name": "Welcome Center"
-		}
-	],
-	"source_url": "https://www.rit.edu/facilitiesmanagement/buildings-maps"
+  "buildings": [
+    { "acronym": "EAS", "id": "1", "name": "George Eastman Hall" },
+    { "acronym": "RIA", "id": "2", "name": "Frank Ritter Arena" },
+    { "acronym": "CLK", "id": "3", "name": "George H. Clark Gymnasium" },
+    { "acronym": "CPC", "id": "3", "name": "Campus Center" },
+    { "acronym": "SAU", "id": "4", "name": "Student Alumni Union" },
+    { "acronym": "WAL", "id": "5", "name": "Wallace Library" },
+    { "acronym": "BOO", "id": "007A", "name": "James E. Booth Hall" },
+    { "acronym": "GAN", "id": "007B", "name": "Frank E. Gannett Hall" },
+    { "acronym": "GOS", "id": "8", "name": "Thomas Gosnell Hall" },
+    {
+      "acronym": "SHD",
+      "id": "11",
+      "name": "Student Hall for Exploration and Development"
+    },
+    { "acronym": "ORN", "id": "13", "name": "Orange Hall" },
+    { "acronym": "RKA", "id": "20", "name": "Riverknoll Apartments" },
+    { "acronym": "POL", "id": "22", "name": "Gene Polisseni Center" },
+    {
+      "acronym": "HAC",
+      "id": "23",
+      "name": "Hale-Andrews Student Life Center"
+    },
+    { "acronym": "AUG", "id": "23", "name": "August Center" },
+    {
+      "acronym": "GOR",
+      "id": "24",
+      "name": "Gordon Field House & Activities Center"
+    },
+    { "acronym": "BHA", "id": "27", "name": "Frances Baker Hall A" },
+    { "acronym": "RHA", "id": "28", "name": "Residence Hall A" },
+    { "acronym": "BHB", "id": "29", "name": "Frances Baker Hall B" },
+    { "acronym": "RHB", "id": "30", "name": "Residence Hall B" },
+    { "acronym": "CHA", "id": "31", "name": "Eugene Colby Hall A" },
+    { "acronym": "RHC", "id": "32", "name": "Residence Hall C" },
+    { "acronym": "CHB", "id": "33", "name": "Eugene Colby Hall B" },
+    { "acronym": "CHC", "id": "37", "name": "Eugene Colby Hall C" },
+    { "acronym": "FHA", "id": "39", "name": "Helen Fish Hall (A)" },
+    { "acronym": "FHB", "id": "41", "name": "Helen Fish Hall (B)" },
+    { "acronym": "FHC", "id": "41", "name": "Helen Fish Hall (C)" },
+    {
+      "acronym": "DSP",
+      "id": "43",
+      "name": "Fredericka Douglass Sprague Perry Hall"
+    },
+    { "acronym": "SHH", "id": "47", "name": "Sol Heumann Hall" },
+    { "acronym": "CGH", "id": "49", "name": "Carlton Gibson Hall" },
+    { "acronym": "MEH", "id": "050A", "name": "Mark Ellingson Hall" },
+    { "acronym": "PTH", "id": "050B", "name": "Peter Peterson Hall" },
+    { "acronym": "RHD", "id": "050C", "name": "Residence Hall D" },
+    { "acronym": "LBJ", "id": "60", "name": "Lyndon Baines Johnson Hall" },
+    { "acronym": "GOL", "id": "70", "name": "Golisano Hall" },
+    { "acronym": "CYB", "id": "70", "name": "Cybersecurity Hall" },
+    { "acronym": "MSS", "id": "71", "name": "MAGIC Spell Studios" },
+    { "acronym": "INS", "id": "73", "name": "Institute Hall" },
+    {
+      "acronym": "CBT",
+      "id": "75",
+      "name": "Center for Bioscience Education & Technology"
+    },
+    { "acronym": "SLA", "id": "78", "name": "Louise Slaughter Hall" },
+    { "acronym": "BRN", "id": "86", "name": "Brown Hall" },
+    { "acronym": "USC", "id": "87", "name": "University Services Center" },
+    { "acronym": "SIH", "id": "87", "name": "Student Innovation Hall" },
+    { "acronym": "ICC", "id": "500", "name": "RIT Inn & Conference Center" },
+    { "acronym": "JEF", "id": "820", "name": "175 Jefferson Road" },
+    { "acronym": "ROS", "id": "10", "name": "Lewis P. Ross Hall" },
+    { "acronym": "GOB", "id": "125", "name": "Gosnell Boathouse" },
+    { "acronym": "PGA", "id": "90", "name": "Perkins Green Apartments" },
+    { "acronym": "OBH", "id": "91", "name": "Observatory House" },
+    { "acronym": "RSC", "id": "53", "name": "Rosica Hall" },
+    { "acronym": "SMT", "id": "16", "name": "Schmitt Interfaith Center" },
+    { "acronym": "SAN", "id": "007A", "name": "Sands Family Studios" },
+    {
+      "acronym": "VIG",
+      "id": "007A",
+      "name": "Vignelli Center for Design Studies"
+    },
+    { "acronym": "UNI", "id": "007A", "name": "University Gallery" },
+    { "acronym": "GLE", "id": "9", "name": "James E. Gleason Hall" },
+    { "acronym": "HLC", "id": "14", "name": "Hugh L. Carey Hall" },
+    { "acronym": "ENG", "id": "17", "name": "Engineering Hall" },
+    {
+      "acronym": "COL",
+      "id": "18",
+      "name": "Munsell Color Science Laboratory"
+    },
+    { "acronym": "STA", "id": "21", "name": "Tiger Stadium" },
+    { "acronym": "GWH", "id": "25", "name": "Grace Watson Hall" },
+    { "acronym": "KGH", "id": "35", "name": "Kate Gleason Hall" },
+    {
+      "acronym": "LAC",
+      "id": "74",
+      "name": "Laboratory for Applied Computing"
+    },
+    {
+      "acronym": "CAR",
+      "id": "76",
+      "name": "Chester F. Carlson Center for Imaging Science"
+    },
+    { "acronym": "BLC", "id": "77", "name": "Bausch & Lomb Center" },
+    { "acronym": "RED", "id": "80", "name": "Red Barn" },
+    { "acronym": "ENT", "id": "82", "name": "Engineering Technology Hall" },
+    { "acronym": "MPT", "id": "83", "name": "Music Performance Theater" },
+    { "acronym": "RES", "id": "84", "name": "Research Center" },
+    { "acronym": "CRS", "id": "89", "name": "Crossroads" },
+    { "acronym": "LH", "id": "100", "name": "Liberty Hill" },
+    { "acronym": "TPD", "id": "150", "name": "125 Tech Park Drive" },
+    { "acronym": "GVP", "id": "400", "name": "Global Village Plaza" },
+    { "acronym": "GVC", "id": "403", "name": "Global Village Way C" },
+    { "acronym": "GVD", "id": "404", "name": "Global Village Way D" },
+    { "acronym": "GVE", "id": "405", "name": "Global Village Way E" },
+    { "acronym": "PPD", "id": "800", "name": "100 Park Point Drive" },
+    { "acronym": "GHD", "id": "616", "name": "Greek House D - Phi Kappa Psi" },
+    { "acronym": "GHE", "id": "620", "name": "Greek House E - Alpha Xi Delta" },
+    { "acronym": "GHF", "id": "624", "name": "Greek House F - Pi Kappa Phi" },
+    { "acronym": "SUS", "id": "81", "name": "Sustainability Institute Hall" },
+    { "acronym": "LOB", "id": "232", "name": "Joseph M. Lobozzo Alumni House" },
+    { "acronym": "GHA", "id": "604", "name": "Greek House A - Zeta Tau Alpha" },
+    {
+      "acronym": "GHC",
+      "id": "612",
+      "name": "Greek House C - Alpha Sigma Alpha"
+    },
+    {
+      "acronym": "GHB",
+      "id": "608",
+      "name": "Greek House B - Delta Phi Epsilon"
+    },
+    { "acronym": "LOW", "id": "12", "name": "Max Lowenthal Hall" },
+    { "acronym": "MON", "id": "15", "name": "Monroe Hall" },
+    { "acronym": "CSD", "id": "55", "name": "Student Development Center" },
+    { "acronym": "LBR", "id": "6", "name": "Liberal Arts Hall" }
+  ]
 }

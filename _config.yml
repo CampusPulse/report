@@ -7,3 +7,6 @@ repository_url: "https://github.com/CampusPulse/report"
 baseurl: ""
 
 exclude: ["Gemfile", "Gemfile.lock"]
+
+plugins:
+  - jekyll-seo-tag
